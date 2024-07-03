@@ -56,6 +56,16 @@ const resolvers={
         deleteGame(_,args){
           db.games= db.games.filter(g=>g.id!==args.id)
           return db.games
+        },
+        editGame(_,args){
+            db.games = db.games.map(g=>{
+                if(g.id === args.id){
+                   return{...g, ...args.edit}
+                }
+                return g
+
+            })
+            return db.games.find(g =>g.id === args.id)
         }
     }
 }
